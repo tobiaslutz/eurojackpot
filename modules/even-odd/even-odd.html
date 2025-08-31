@@ -1,0 +1,104 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">
+      <i class="bi bi-grid-3x2 me-2 text-success"></i>Even-Odd Analysis
+    </h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <button type="button" class="btn btn-outline-primary" onclick="showDefaultContent()">
+        <i class="bi bi-arrow-left me-2"></i>Back to Dashboard
+      </button>
+    </div>
+  </div>
+  
+  <p class="lead">Analyze even-odd distribution patterns in main numbers, euro numbers, and combined draws.</p>
+  
+  <!-- Main Numbers and Euro Numbers Charts Side by Side -->
+  <div class="row mb-5">
+    <div class="col-lg-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <i class="bi bi-speedometer2 me-2"></i>Main Numbers Even-Odd Distribution (5 Numbers)
+          </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted">Distribution of even numbers in main number combinations (1-50)</p>
+          <div class="chart-container">
+            <canvas id="mainNumbersChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <i class="bi bi-star me-2"></i>Euro Numbers Even-Odd Distribution (2 Numbers)
+          </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted">Distribution of even numbers in euro number pairs</p>
+          <div class="chart-container">
+            <canvas id="euroNumbersChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Combined Numbers Chart (Full Width) -->
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <i class="bi bi-layers me-2"></i>Combined Numbers Even-Odd Distribution (7 Numbers)
+          </h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted">Distribution of even numbers across all drawn numbers (main + euro)</p>
+          <div class="chart-container">
+            <canvas id="combinedNumbersChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Analysis Summary -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <i class="bi bi-info-circle me-2"></i>Analysis Summary
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <h6><i class="bi bi-speedometer2 me-1"></i>Main Numbers</h6>
+              <p class="small text-muted">
+                Even-odd patterns for 5 main numbers selected from 1-50 range (25 even, 25 odd numbers).
+                Shows empirical vs theoretical hypergeometric distribution.
+              </p>
+            </div>
+            <div class="col-md-4">
+              <h6><i class="bi bi-star me-1"></i>Euro Numbers</h6>
+              <p class="small text-muted">
+                Even-odd patterns for 2 euro numbers. Theoretical probabilities remain constant 
+                regardless of range changes (1-8, 1-10, 1-12) due to equal even/odd distribution.
+              </p>
+            </div>
+            <div class="col-md-4">
+              <h6><i class="bi bi-layers me-1"></i>Combined</h6>
+              <p class="small text-muted">
+                Even-odd patterns across all 7 numbers per draw. Theoretical probabilities 
+                calculated using independence of main and euro number selections.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

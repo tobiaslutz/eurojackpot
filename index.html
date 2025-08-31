@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eurojackpot Analysis Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="style.css" rel="stylesheet">
+  <style>
+    /* Custom styles for sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      padding: 48px 0 0;
+      box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+      background-color: #f8f9fa;
+    }
+
+    .sidebar-sticky {
+      position: relative;
+      top: 0;
+      height: calc(100vh - 48px);
+      padding-top: .5rem;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .sidebar .nav-link {
+      font-weight: 500;
+      color: #333;
+    }
+
+    .sidebar .nav-link .feather {
+      margin-right: 4px;
+      color: #727272;
+    }
+
+    .sidebar .nav-link.active {
+      color: #2470dc;
+    }
+
+    .sidebar .nav-link:hover .feather,
+    .sidebar .nav-link.active .feather {
+      color: inherit;
+    }
+
+    .sidebar-heading {
+      font-size: .75rem;
+    }
+
+    /* Navbar for desktop */
+    .navbar-brand {
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+      background-color: rgba(0, 0, 0, .25);
+      box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+    }
+
+    .navbar .navbar-toggler {
+      top: .25rem;
+      right: 1rem;
+    }
+
+    /* Main content adjustment */
+    .main-content {
+      margin-left: 240px;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 767.98px) {
+      .sidebar {
+        position: relative;
+        height: auto;
+        padding: 0;
+        box-shadow: none;
+      }
+      
+      .main-content {
+        margin-left: 0;
+      }
+      
+      .mobile-nav-toggle {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1050;
+        background-color: #0d6efd;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 12px;
+      }
+    }
+
+    /* Button toggle styles */
+    .btn-toggle {
+      padding: .25rem .5rem;
+      font-weight: 600;
+      color: rgba(0, 0, 0, .65);
+      background-color: transparent;
+      border: 0;
+    }
+
+    .btn-toggle:hover,
+    .btn-toggle:focus {
+      color: rgba(0, 0, 0, .85);
+      background-color: #d2f4ea;
+    }
+
+    .btn-toggle::before {
+      width: 1.25em;
+      line-height: 0;
+      content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m5 6 3 3 3-3'/%3e%3c/svg%3e");
+      transition: transform .35s ease;
+      transform-origin: .5em 50%;
+    }
+
+    .btn-toggle[aria-expanded="true"] {
+      color: rgba(0, 0, 0, .85);
+    }
+
+    .btn-toggle[aria-expanded="true"]::before {
+      transform: rotate(90deg);
+    }
+
+    .btn-toggle-nav a {
+      display: inline-flex;
+      padding: .1875rem .5rem;
+      margin-top: .125rem;
+      margin-left: 1.25rem;
+      text-decoration: none;
+      color: #0d6efd;
+      font-weight: 500;
+    }
+
+    .btn-toggle-nav a:hover,
+    .btn-toggle-nav a:focus {
+      background-color: #e3f2fd;
+      color: #0a58ca;
+      border-radius: 0.375rem;
+    }
+
+    .btn-toggle-nav a.active {
+      background-color: #cfe2ff;
+      color: #084298;
+      border-radius: 0.375rem;
+    }
+
+    /* Hot & Cold button hover style */
+    .hot-cold-link:hover {
+      color: rgba(0, 0, 0, .85) !important;
+      background-color: #d2f4ea !important;
+      text-decoration: none !important;
+    }
+
+    /* Euro charts container */
+    .euro-chart-container {
+      height: 400px;
+    }
+
+    /* Chart containers for responsive layout */
+    .chart-container {
+      height: 500px;
+      margin-bottom: 2rem;
+    }
+
+    .main-chart-container {
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile Navigation Toggle Button (visible only on mobile) -->
+  <button class="btn mobile-nav-toggle d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav">
+    <i class="bi bi-list fs-4"></i>
+  </button>
+
+  <!-- Mobile Offcanvas Navigation (visible only on mobile) -->
+  <div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="mobileNav">
+    <div class="offcanvas-header bg-dark text-white">
+      <h5 class="offcanvas-title">
+        <i class="bi bi-bootstrap me-2"></i>Eurojackpot Dashboard
+      </h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="list-unstyled ps-0">
+         <!-- Drawing Results Section -->
+        <li class="mb-1">
+          <a href="#" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 w-100 text-start drawing-results-link"
+            style="text-decoration: none;">
+            <i class="bi bi-calendar-check me-2"></i>
+            Drawing Results
+          </a>
+        </li>
+        <!-- Home Section -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed w-100 text-start hot-cold-link"
+            data-bs-toggle="collapse" data-bs-target="#mobile-home-collapse" aria-expanded="false">
+            <i class="bi bi-bar-chart me-2"></i>
+            Hot & Cold
+          </button>
+          <div class="collapse" id="mobile-home-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a href="#" class="d-inline-flex text-decoration-none rounded numbers-link">
+                  <i class="bi bi-speedometer2 me-2"></i>Numbers
+                </a>
+              </li>
+              <li>
+                <a href="#" class="d-inline-flex text-decoration-none rounded sums-link">
+                  <i class="bi bi-arrow-clockwise me-2"></i>Sums
+                </a>
+              </li>
+              <li>
+                <a href="#" class="d-inline-flex text-decoration-none rounded even-odd-link">
+                  <i class="bi bi-grid-3x2 me-2"></i>Even-Odd
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Analytics Section -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed w-100 text-start"
+            data-bs-toggle="collapse" data-bs-target="#mobile-analytics-collapse" aria-expanded="false">
+            <i class="bi bi-bar-chart me-2"></i>
+            Analytics
+          </button>
+          <div class="collapse" id="mobile-analytics-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a href="#" class="d-inline-flex text-decoration-none rounded">
+                  <i class="bi bi-graph-up me-2"></i>Trends
+                </a>
+              </li>
+              <li>
+                <a href="#" class="d-inline-flex text-decoration-none rounded">
+                  <i class="bi bi-pie-chart me-2"></i>Statistics
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Account Section -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed w-100 text-start"
+            data-bs-toggle="collapse" data-bs-target="#mobile-account-collapse" aria-expanded="false">
+            <i class="bi bi-person-circle me-2"></i>
+            Account
+          </button>
+          <div class="collapse" id="mobile-account-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a href="#" class="d-inline-flex text-decoration-none rounded">
+                  <i class="bi bi-gear me-2"></i>Settings
+                </a>
+              </li>
+              <li>
+                <a href="#" class="d-inline-flex text-decoration-none rounded">
+                  <i class="bi bi-box-arrow-right me-2"></i>Sign out
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Desktop Top Navbar -->
+  <nav class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow d-none d-md-flex">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#" onclick="showDefaultContent(); return false;">
+      <i class="bi bi-bootstrap me-2"></i>Eurojackpot Dashboard
+    </a>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Desktop Sidebar (always visible on desktop) -->
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-none d-md-block sidebar collapse">
+        <div class="sidebar-sticky pt-3">
+          <ul class="list-unstyled ps-0">
+            <li class="mb-1">
+              <a href="#" class="btn btn-toggle d-inline-flex align-items-center rounded border-0 w-100 text-start drawing-results-link"
+                 style="text-decoration: none;">
+                <i class="bi bi-calendar-check me-2"></i>
+                Drawing Results
+              </a>
+            </li>
+            <!-- Home Section -->
+            <li class="mb-1">
+              <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed hot-cold-link" 
+                data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false"
+                onclick="showDefaultContent()">
+                <i class="bi bi-bar-chart me-2"></i>
+                Hot & Cold
+              </button>
+              <div class="collapse" id="home-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a href="#" class="d-inline-flex text-decoration-none rounded numbers-link">
+                      <i class="bi bi-speedometer2 me-2"></i>Numbers
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="d-inline-flex text-decoration-none rounded sums-link">
+                      <i class="bi bi-arrow-clockwise me-2"></i>Sums
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="d-inline-flex text-decoration-none rounded even-odd-link">
+                      <i class="bi bi-grid-3x2 me-2"></i>Even-Odd
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- Analytics Section -->
+            <li class="mb-1">
+              <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" 
+                data-bs-toggle="collapse" data-bs-target="#analytics-collapse" aria-expanded="false">
+                <i class="bi bi-bar-chart me-2"></i>
+                Analytics
+              </button>
+              <div class="collapse" id="analytics-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a href="#" class="d-inline-flex text-decoration-none rounded">
+                      <i class="bi bi-graph-up me-2"></i>Trends
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="d-inline-flex text-decoration-none rounded">
+                      <i class="bi bi-pie-chart me-2"></i>Statistics
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            <!-- Account Section -->
+            <li class="mb-1">
+              <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" 
+                data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                <i class="bi bi-person-circle me-2"></i>
+                Account
+              </button>
+              <div class="collapse" id="account-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a href="#" class="d-inline-flex text-decoration-none rounded">
+                      <i class="bi bi-gear me-2"></i>Settings
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="d-inline-flex text-decoration-none rounded">
+                      <i class="bi bi-box-arrow-right me-2"></i>Sign out
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+
+          <hr>
+          
+          <div class="px-3 py-2">
+            <small class="text-muted">
+              <i class="bi bi-info-circle me-1"></i>
+              Dashboard v1.0
+            </small>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+        <div class="p-4">
+          <!-- Default Content -->
+          <div id="default-content">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Eurojackpot Analysis Dashboard</h1>
+            </div>
+            
+            <p class="lead">Welcome to the comprehensive Eurojackpot analysis platform.</p>
+            
+            <div class="row">
+              <!-- Add this card to the dashboard grid (around line 420, before existing cards) -->
+
+              <div class="col-md-6 mb-4">
+                <div class="card h-100 border-0 shadow-sm">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <i class="bi bi-calendar-check me-2 text-info"></i>Drawing Results
+                    </h5>
+                    <p class="card-text">View the latest Eurojackpot drawing results and browse historical draws from the past 12 months.</p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                      <a href="#" class="btn btn-info drawing-results-link">
+                        <i class="bi bi-eye me-1"></i>View Results
+                      </a>
+                      <small class="text-muted">Updated twice weekly</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <i class="bi bi-speedometer2 me-2 text-primary"></i>Numbers Analysis
+                    </h5>
+                    <p class="card-text">Analyze frequency patterns of main numbers (1-50) and euro numbers across all historical draws.</p>
+                    <a href="#" class="btn btn-primary numbers-link">
+                      <i class="bi bi-bar-chart me-1"></i>View Analysis
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <i class="bi bi-arrow-clockwise me-2 text-secondary"></i>Sums Analysis
+                    </h5>
+                    <p class="card-text">Examine sum distributions of drawn numbers across different time periods.</p>
+                    <a href="#" class="btn btn-secondary sums-link">
+                      <i class="bi bi-pie-chart me-1"></i>View Analysis
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <i class="bi bi-grid-3x2 me-2 text-success"></i>Even-Odd Analysis
+                    </h5>
+                    <p class="card-text">Analyze even-odd distribution patterns in main numbers and euro numbers.</p>
+                    <a href="#" class="btn btn-success even-odd-link">
+                      <i class="bi bi-grid-3x2 me-1"></i>View Analysis
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-clock-history me-2"></i>Recent Activity
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="flex-shrink-0">
+                            <i class="bi bi-check-circle-fill text-success"></i>
+                          </div>
+                          <div class="flex-grow-1 ms-3">
+                            <small class="text-muted">Data updated</small>
+                            <br>
+                            <strong>Latest draw analysis</strong>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="flex-shrink-0">
+                            <i class="bi bi-graph-up text-info"></i>
+                          </div>
+                          <div class="flex-grow-1 ms-3">
+                            <small class="text-muted">Statistics generated</small>
+                            <br>
+                            <strong>Frequency analysis</strong>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="flex-shrink-0">
+                            <i class="bi bi-file-earmark-text text-warning"></i>
+                          </div>
+                          <div class="flex-grow-1 ms-3">
+                            <small class="text-muted">Reports available</small>
+                            <br>
+                            <strong>Historical trends</strong>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Content Container -->
+          <div id="dynamic-content">
+            <!-- Content will be loaded here -->
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
