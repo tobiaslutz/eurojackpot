@@ -1,0 +1,281 @@
+{
+  "main": {
+    "hot": [
+      {
+        "number": 7,
+        "relativeFrequency": 0.0214857142857142
+      },
+      {
+        "number": 11,
+        "relativeFrequency": 0.0226285714285714
+      },
+      {
+        "number": 16,
+        "relativeFrequency": 0.0219428571428571
+      },
+      {
+        "number": 17,
+        "relativeFrequency": 0.0224
+      },
+      {
+        "number": 18,
+        "relativeFrequency": 0.0214857142857142
+      },
+      {
+        "number": 20,
+        "relativeFrequency": 0.0242285714285714
+      },
+      {
+        "number": 21,
+        "relativeFrequency": 0.0219428571428571
+      },
+      {
+        "number": 34,
+        "relativeFrequency": 0.0233142857142857
+      },
+      {
+        "number": 35,
+        "relativeFrequency": 0.0217142857142857
+      },
+      {
+        "number": 49,
+        "relativeFrequency": 0.0233142857142857
+      }
+    ],
+    "cold": [
+      {
+        "number": 5,
+        "relativeFrequency": 0.0171428571428571
+      },
+      {
+        "number": 24,
+        "relativeFrequency": 0.0178285714285714
+      },
+      {
+        "number": 25,
+        "relativeFrequency": 0.0171428571428571
+      },
+      {
+        "number": 27,
+        "relativeFrequency": 0.0169142857142857
+      },
+      {
+        "number": 28,
+        "relativeFrequency": 0.0180571428571428
+      },
+      {
+        "number": 33,
+        "relativeFrequency": 0.0185142857142857
+      },
+      {
+        "number": 36,
+        "relativeFrequency": 0.0178285714285714
+      },
+      {
+        "number": 42,
+        "relativeFrequency": 0.0185142857142857
+      },
+      {
+        "number": 48,
+        "relativeFrequency": 0.0153142857142857
+      },
+      {
+        "number": 50,
+        "relativeFrequency": 0.0169142857142857
+      }
+    ],
+    "neutral": [
+      {
+        "number": 1,
+        "relativeFrequency": 0.0212571428571428
+      },
+      {
+        "number": 2,
+        "relativeFrequency": 0.0192
+      },
+      {
+        "number": 3,
+        "relativeFrequency": 0.0187428571428571
+      },
+      {
+        "number": 4,
+        "relativeFrequency": 0.0196571428571428
+      },
+      {
+        "number": 6,
+        "relativeFrequency": 0.0205714285714285
+      },
+      {
+        "number": 8,
+        "relativeFrequency": 0.0208
+      },
+      {
+        "number": 9,
+        "relativeFrequency": 0.0210285714285714
+      },
+      {
+        "number": 10,
+        "relativeFrequency": 0.0189714285714285
+      },
+      {
+        "number": 12,
+        "relativeFrequency": 0.0198857142857142
+      },
+      {
+        "number": 13,
+        "relativeFrequency": 0.0210285714285714
+      },
+      {
+        "number": 14,
+        "relativeFrequency": 0.0205714285714285
+      },
+      {
+        "number": 15,
+        "relativeFrequency": 0.0208
+      },
+      {
+        "number": 19,
+        "relativeFrequency": 0.0203428571428571
+      },
+      {
+        "number": 22,
+        "relativeFrequency": 0.0192
+      },
+      {
+        "number": 23,
+        "relativeFrequency": 0.0210285714285714
+      },
+      {
+        "number": 26,
+        "relativeFrequency": 0.0187428571428571
+      },
+      {
+        "number": 29,
+        "relativeFrequency": 0.0201142857142857
+      },
+      {
+        "number": 30,
+        "relativeFrequency": 0.0210285714285714
+      },
+      {
+        "number": 31,
+        "relativeFrequency": 0.0194285714285714
+      },
+      {
+        "number": 32,
+        "relativeFrequency": 0.0196571428571428
+      },
+      {
+        "number": 37,
+        "relativeFrequency": 0.0189714285714285
+      },
+      {
+        "number": 38,
+        "relativeFrequency": 0.0205714285714285
+      },
+      {
+        "number": 39,
+        "relativeFrequency": 0.0210285714285714
+      },
+      {
+        "number": 40,
+        "relativeFrequency": 0.0189714285714285
+      },
+      {
+        "number": 41,
+        "relativeFrequency": 0.0210285714285714
+      },
+      {
+        "number": 43,
+        "relativeFrequency": 0.0201142857142857
+      },
+      {
+        "number": 44,
+        "relativeFrequency": 0.0194285714285714
+      },
+      {
+        "number": 45,
+        "relativeFrequency": 0.0203428571428571
+      },
+      {
+        "number": 46,
+        "relativeFrequency": 0.0201142857142857
+      },
+      {
+        "number": 47,
+        "relativeFrequency": 0.0187428571428571
+      }
+    ]
+  },
+  "euro": {
+    "hot": [
+      {
+        "number": 3,
+        "relativeFrequency": 0.1019830028328611
+      },
+      {
+        "number": 5,
+        "relativeFrequency": 0.1005665722379603
+      },
+      {
+        "number": 10,
+        "relativeFrequency": 0.0949008498583569
+      }
+    ],
+    "cold": [
+      {
+        "number": 2,
+        "relativeFrequency": 0.0708215297450425
+      },
+      {
+        "number": 8,
+        "relativeFrequency": 0.0736543909348441
+      },
+      {
+        "number": 11,
+        "relativeFrequency": 0.0722379603399433
+      }
+    ],
+    "neutral": [
+      {
+        "number": 1,
+        "relativeFrequency": 0.0835694050991501
+      },
+      {
+        "number": 4,
+        "relativeFrequency": 0.0736543909348441
+      },
+      {
+        "number": 6,
+        "relativeFrequency": 0.0793201133144475
+      },
+      {
+        "number": 7,
+        "relativeFrequency": 0.0793201133144475
+      },
+      {
+        "number": 9,
+        "relativeFrequency": 0.0793201133144475
+      },
+      {
+        "number": 12,
+        "relativeFrequency": 0.0906515580736544
+      }
+    ]
+  },
+  "lastUpdated": "2025-09-07",
+  "metadata": {
+    "mainNumbersTotal": 50,
+    "euroNumbersTotal": 12,
+    "mainHotCount": 10,
+    "mainColdCount": 10,
+    "euroHotCount": 3,
+    "euroColdCount": 3,
+    "generatedBy": "generate_hot_cold_numbers.py",
+    "dataSource": {
+      "mainNumbers": "main_numbers_frequency_analysis.csv",
+      "euroNumbers": "euro_numbers_interval_3_(2022-present)/relative_frequencies.csv"
+    },
+    "description": "Numbers categorized by relative frequency with frequency values included"
+  }
+}

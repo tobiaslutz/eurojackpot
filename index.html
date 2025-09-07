@@ -226,6 +226,34 @@
           </div>
         </li>
 
+        <!-- Number Generator Section -->
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed w-100 text-start"
+            data-bs-toggle="collapse" data-bs-target="#mobile-generator-collapse" aria-expanded="false">
+            <i class="bi bi-dice-6 me-2"></i>
+            Number Generator
+          </button>
+          <div class="collapse" id="mobile-generator-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a href="#" class="nav-link d-inline-flex text-decoration-none rounded generator-link" data-type="random-pick">
+                  <i class="bi bi-arrow-clockwise me-2"></i>Random Pick
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link d-inline-flex text-decoration-none rounded generator-link" data-type="custom-pick">
+                  <i class="bi bi-person-gear me-2"></i>Custom Pick
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link d-inline-flex text-decoration-none rounded generator-link" data-type="structured-pick">
+                  <i class="bi bi-diagram-3 me-2"></i>Structured Pick
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
         <!-- Analytics Section -->
         <li class="mb-1">
           <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed w-100 text-start"
@@ -324,6 +352,34 @@
               </div>
             </li>
 
+            <!-- Number Generator Section -->
+            <li class="mb-1">
+              <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed w-100 text-start"
+                data-bs-toggle="collapse" data-bs-target="#generator-collapse" aria-expanded="false">
+                <i class="bi bi-dice-6 me-2"></i>
+                Number Generator
+              </button>
+              <div class="collapse" id="generator-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <a href="#" class="nav-link d-inline-flex text-decoration-none rounded generator-link" data-type="random-pick">
+                      <i class="bi bi-arrow-clockwise me-2"></i>Random Pick
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="nav-link d-inline-flex text-decoration-none rounded generator-link" data-type="custom-pick">
+                      <i class="bi bi-person-gear me-2"></i>Custom Pick
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" class="nav-link d-inline-flex text-decoration-none rounded generator-link" data-type="structured-pick">
+                      <i class="bi bi-diagram-3 me-2"></i>Structured Pick
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
             <!-- Analytics Section -->
             <li class="mb-1">
               <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" 
@@ -393,14 +449,18 @@
             
             <p class="lead">Welcome to the comprehensive Eurojackpot analysis platform.</p>
             
-            <div class="row">
-              <!-- Add this card to the dashboard grid (around line 420, before existing cards) -->
-
+            <!-- Drawing Results Section -->
+            <div class="row mb-4">
+              <div class="col-12 mb-3">
+                <h3 class="h4 text-muted">
+                  <i class="bi bi-calendar-check me-2"></i>Drawing Results
+                </h3>
+              </div>
               <div class="col-md-6 mb-4">
                 <div class="card h-100 border-0 shadow-sm">
                   <div class="card-body">
                     <h5 class="card-title">
-                      <i class="bi bi-calendar-check me-2 text-info"></i>Drawing Results
+                      <i class="bi bi-calendar-check me-2 text-info"></i>Latest Results
                     </h5>
                     <p class="card-text">View the latest Eurojackpot drawing results and browse historical draws from the past 12 months.</p>
                     <div class="d-flex justify-content-between align-items-center mt-3">
@@ -411,6 +471,15 @@
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+      
+            <!-- Hot & Cold Section -->
+            <div class="row mb-4">
+              <div class="col-12 mb-3">
+                <h3 class="h4 text-muted">
+                  <i class="bi bi-bar-chart me-2"></i>Hot & Cold
+                </h3>
               </div>
               <div class="col-md-6 mb-4">
                 <div class="card h-100">
@@ -425,8 +494,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
               <div class="col-md-6 mb-4">
                 <div class="card h-100">
                   <div class="card-body">
@@ -440,6 +507,9 @@
                   </div>
                 </div>
               </div>
+            </div>
+      
+            <div class="row mb-4">
               <div class="col-md-6 mb-4">
                 <div class="card h-100">
                   <div class="card-body">
@@ -454,14 +524,67 @@
                 </div>
               </div>
             </div>
+      
+            <!-- Number Generator Section -->
+            <div class="row mb-4">
+              <div class="col-12 mb-3">
+                <h3 class="h4 text-muted">
+                  <i class="bi bi-dice-6 me-2"></i>Number Generator
+                </h3>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <i class="bi bi-arrow-clockwise me-2 text-primary"></i>Random Pick
+                    </h5>
+                    <p class="card-text">Pure chance — every number generated completely at random.</p>
+                    <a href="#" class="btn btn-primary generator-link" data-type="random-pick">
+                      <i class="bi bi-dice-1 me-1"></i>Generate Random
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <i class="bi bi-person-gear me-2 text-success"></i>Custom Pick
+                    </h5>
+                    <p class="card-text">Combine your chosen numbers with random selection for a personalized play.</p>
+                    <a href="#" class="btn btn-success generator-link" data-type="custom-pick">
+                      <i class="bi bi-gear me-1"></i>Customize Pick
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <div class="row mb-4">
+              <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <i class="bi bi-diagram-3 me-2 text-warning"></i>Structured Pick
+                    </h5>
+                    <p class="card-text">Smart patterns designed for frequent wins by targeting common prize tiers — while keeping the full jackpot chance.</p>
+                    <a href="#" class="btn btn-warning generator-link" data-type="structured-pick">
+                      <i class="bi bi-cpu me-1"></i>Smart Generate
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- Recent Activity Section -->
             <div class="row mt-4">
+              <div class="col-12 mb-3">
+                <h3 class="h4 text-muted">
+                  <i class="bi bi-clock-history me-2"></i>Recent Activity
+                </h3>
+              </div>
               <div class="col-12">
                 <div class="card">
-                  <div class="card-header">
-                    <h5 class="mb-0">
-                      <i class="bi bi-clock-history me-2"></i>Recent Activity
-                    </h5>
-                  </div>
                   <div class="card-body">
                     <div class="row">
                       <div class="col-md-4">
@@ -506,7 +629,7 @@
               </div>
             </div>
           </div>
-
+      
           <!-- Dynamic Content Container -->
           <div id="dynamic-content">
             <!-- Content will be loaded here -->

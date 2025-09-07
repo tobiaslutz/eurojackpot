@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">
+      <i class="bi bi-dice-6 me-2 text-primary"></i>Random Pick Generator
+    </h1>
+    <button class="btn btn-outline-secondary" id="back-to-dashboard">
+      <i class="bi bi-arrow-left me-1"></i>Back to Dashboard
+    </button>
+  </div>
+  
+  <div class="alert alert-info d-flex align-items-center" role="alert">
+    <i class="bi bi-info-circle me-2"></i>
+    <div>Generate completely random lottery numbers with optional constraints.</div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-gear me-2"></i>Generator Settings
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="random-count" class="form-label">Number of picks to generate</label>
+            <select class="form-select" id="random-count">
+              <option value="1" selected>1 pick</option>
+              <option value="3">3 picks</option>
+              <option value="5">5 picks</option>
+              <option value="10">10 picks</option>
+              <option value="20">20 picks</option>
+            </select>
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="avoid-consecutive" checked>
+            <label class="form-check-label" for="avoid-consecutive">
+              Avoid consecutive numbers (e.g., 7, 8, 9)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="balance-ranges">
+            <label class="form-check-label" for="balance-ranges">
+              Balance number ranges (1-10, 11-20, etc.)
+            </label>
+          </div>
+          <button class="btn btn-primary w-100 mt-3" id="generate-btn">
+            <i class="bi bi-dice-6 me-1"></i>Generate Random Pick
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-ticket me-2"></i>Generated Numbers
+          </h5>
+        </div>
+        <div class="card-body">
+          <div id="generated-numbers" class="text-center">
+            <p class="text-muted">Configure your settings and click "Generate"</p>
+          </div>
+          <button class="btn btn-outline-secondary w-100 mt-3" id="export-btn" style="display: none;">
+            <i class="bi bi-download me-1"></i>Export Results
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

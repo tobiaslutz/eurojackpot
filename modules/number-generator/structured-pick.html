@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">
+      <i class="bi bi-diagram-3 me-2 text-warning"></i>Structured Pick Generator
+    </h1>
+    <button class="btn btn-outline-secondary" id="back-to-dashboard">
+      <i class="bi bi-arrow-left me-1"></i>Back to Dashboard
+    </button>
+  </div>
+  
+  <div class="alert alert-info d-flex align-items-center" role="alert">
+    <i class="bi bi-info-circle me-2"></i>
+    <div>Smart patterns designed for frequent wins by targeting common prize tiers — while keeping the full jackpot chance.</div>
+  </div>
+  
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-cpu me-2"></i>Strategy Settings
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="strategy" class="form-label">Generation strategy</label>
+            <select class="form-select" id="strategy">
+              <option value="hot-numbers" selected>Hot number focus</option>
+              <option value="cold-numbers">Cold number focus</option>
+              <option value="mixed">Mixed approach - combine hot and cold</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="structured-count" class="form-label">Number of picks to generate</label>
+            <select class="form-select" id="structured-count">
+              <option value="5">5 picks</option>
+              <option value="10" selected>10 picks</option>
+              <option value="15">15 picks</option>
+              <option value="20">20 picks</option>
+              <option value="50">50 picks</option>
+              <option value="100">100 picks</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-ticket me-2"></i>Generated Numbers
+          </h5>
+        </div>
+        <div class="card-body">
+          <div id="generated-numbers" class="text-center">
+            <p class="text-muted">Select strategy and click "Generate"</p>
+          </div>
+          <button class="btn btn-warning w-100 mt-3" id="generate-btn">
+            <i class="bi bi-cpu me-1"></i>Generate Smart Pick
+          </button>
+          <button class="btn btn-outline-secondary w-100 mt-2" id="export-btn" style="display: none;">
+            <i class="bi bi-download me-1"></i>Export Results
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Strategy Visualization Section with Vertical Bars -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-bar-chart me-2"></i>Frequency Analysis
+          </h5>
+        </div>
+        <div class="card-body">
+          <div id="strategy-visualization">
+            <div class="text-center text-muted">
+              <i class="bi bi-hourglass-split me-2"></i>
+              <span>Loading frequency data...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

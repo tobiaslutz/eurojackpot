@@ -57,11 +57,69 @@ async function loadModule(moduleName) {
   }
 }
 
+// Function to load generator modules (special handling)
+async function loadGeneratorModule(generatorType) {
+  try {
+    // Hide default content
+    document.getElementById('default-content').style.display = 'none';
+    
+    // Load HTML content from the generator-specific file
+    const htmlResponse = await fetch(`modules/number-generator/${generatorType}.html`);
+    const htmlContent = await htmlResponse.text();
+    document.getElementById('dynamic-content').innerHTML = htmlContent;
+    
+    // Load the generator-specific JavaScript
+    const script = document.createElement('script');
+    script.src = `js/modules/number-generator/${generatorType}.js`;
+    script.onload = () => {
+      // Initialize the specific generator
+      setTimeout(() => {
+        switch(generatorType) {
+          case 'random-pick':
+            if (window.RandomPickGenerator) {
+              currentModule = new window.RandomPickGenerator();
+            }
+            break;
+          case 'custom-pick':
+            if (window.CustomPickGenerator) {
+              currentModule = new window.CustomPickGenerator();
+            }
+            break;
+          case 'structured-pick':
+            if (window.StructuredPickGenerator) {
+              currentModule = new window.StructuredPickGenerator();
+            }
+            break;
+        }
+      }, 100);
+    };
+    
+    // Remove existing script if present
+    const existingScript = document.querySelector(`script[src="js/modules/number-generator/${generatorType}.js"]`);
+    if (existingScript) {
+      existingScript.remove();
+    }
+    
+    document.head.appendChild(script);
+    
+    // Close mobile navigation if open
+    const mobileNav = bootstrap.Offcanvas.getInstance(document.getElementById('mobileNav'));
+    if (mobileNav) {
+      mobileNav.hide();
+    }
+    
+  } catch (error) {
+    console.error(`Error loading generator ${generatorType}:`, error);
+    document.getElementById('dynamic-content').innerHTML = 
+      '<div class="alert alert-danger">Error loading generator. Please try again.</div>';
+  }
+}
+
 // Event listeners for navigation
 document.addEventListener('DOMContentLoaded', function() {
   console.log('Setting up navigation event listeners');
   
-  // Drawing Results links (MOVED INSIDE DOMContentLoaded)
+  // Drawing Results links
   const drawingResultsLinks = document.querySelectorAll('.drawing-results-link');
   drawingResultsLinks.forEach(link => {
     link.addEventListener('click', function(e) {
@@ -71,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Handle Numbers links (both desktop and mobile)
+  // Handle Numbers links
   const numbersLinks = document.querySelectorAll('.numbers-link');
   numbersLinks.forEach(link => {
     link.addEventListener('click', function(e) {
@@ -81,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Handle Sums links (both desktop and mobile)
+  // Handle Sums links
   const sumsLinks = document.querySelectorAll('.sums-link');
   sumsLinks.forEach(link => {
     link.addEventListener('click', function(e) {
@@ -91,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Handle Even-Odd links (both desktop and mobile)
+  // Handle Even-Odd links
   const evenOddLinks = document.querySelectorAll('.even-odd-link');
   evenOddLinks.forEach(link => {
     link.addEventListener('click', function(e) {
@@ -101,13 +159,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Handle Hot & Cold links (both desktop and mobile)
+  // Handle Hot & Cold links
   const hotColdLinks = document.querySelectorAll('.hot-cold-link');
   hotColdLinks.forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
       console.log('Hot & Cold link clicked');
       showDefaultContent();
+    });
+  });
+
+  // Handle Generator links
+  const generatorLinks = document.querySelectorAll('.generator-link');
+  generatorLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const generatorType = this.getAttribute('data-type');
+      console.log('Generator link clicked:', generatorType);
+      loadGeneratorModule(generatorType);
     });
   });
   

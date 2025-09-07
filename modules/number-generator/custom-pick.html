@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">
+      <i class="bi bi-person-gear me-2 text-success"></i>Custom Pick Generator
+    </h1>
+    <button class="btn btn-outline-secondary" id="back-to-dashboard">
+      <i class="bi bi-arrow-left me-1"></i>Back to Dashboard
+    </button>
+  </div>
+  
+  <div class="alert alert-info d-flex align-items-center" role="alert">
+    <i class="bi bi-info-circle me-2"></i>
+    <div>Combine your chosen numbers with random selection for a personalized play.</div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-gear me-2"></i>Generator Settings
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="custom-main" class="form-label">Your main numbers (optional, 1-50)</label>
+            <input type="text" class="form-control" id="custom-main" placeholder="e.g., 7, 14, 21, 28">
+            <div class="form-text">Enter up to 5 numbers separated by commas. Remaining will be random.</div>
+          </div>
+          <div class="mb-3">
+            <label for="custom-euro" class="form-label">Your euro numbers (optional, 1-12)</label>
+            <input type="text" class="form-control" id="custom-euro" placeholder="e.g., 3, 9">
+            <div class="form-text">Enter up to 2 numbers separated by commas. Remaining will be random.</div>
+          </div>
+          <div class="mb-3">
+            <label for="custom-count" class="form-label">Number of picks to generate</label>
+            <select class="form-select" id="custom-count">
+              <option value="1" selected>1 pick</option>
+              <option value="3">3 picks</option>
+              <option value="5">5 picks</option>
+              <option value="10">10 picks</option>
+              <option value="20">20 picks</option>
+            </select>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="balance-ranges">
+            <label class="form-check-label" for="balance-ranges">
+              Balance number ranges of remaining numbers (1-10, 11-20, etc.)
+            </label>
+          </div>
+          <button class="btn btn-success w-100 mt-3" id="generate-btn">
+            <i class="bi bi-gear me-1"></i>Generate Custom Pick
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-ticket me-2"></i>Generated Numbers
+          </h5>
+        </div>
+        <div class="card-body">
+          <div id="generated-numbers" class="text-center">
+            <p class="text-muted">Enter your numbers and click "Generate"</p>
+          </div>
+          <button class="btn btn-outline-secondary w-100 mt-3" id="export-btn" style="display: none;">
+            <i class="bi bi-download me-1"></i>Export Results
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
